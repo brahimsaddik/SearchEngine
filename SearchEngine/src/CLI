@@ -1,0 +1,95 @@
+
+import java.io.BufferedReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.io.File;
+
+import java.util.List;
+import java.util.Map;
+import static java.lang.Math.toIntExact;
+import java.util.Scanner;
+import java.util.Vector;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class CLI {
+
+	static List<Integer> summitsContains = new ArrayList<Integer>();
+	static int summitsNumbers = 0;
+	static int arcsNumbers = 0;
+
+	public static Vector<Integer> C = new Vector<>();
+	public static Vector<Integer> L = new Vector<>();
+	public static Vector<Integer> I = new Vector<>();
+
+	static List<Float> Y = new ArrayList<Float>();
+	static List<Float> x = new ArrayList<Float>();
+	static float d;
+	static float e;
+
+	public static void main(String[] args) {
+
+		d = Float.parseFloat(args[1]);
+		e = Float.parseFloat(args[2]);
+
+		Produit();
+
+	}
+
+	public static void Produit() {
+
+		Boolean T = false;
+		for (int i = 0; i < L.size() - 1; i++) {
+			Y.add(i, (float) 0);
+
+		}
+		for (int i = 0; i < summitsNumbers; i++) {
+			x.add(i, (float) 1 / (float) summitsNumbers);
+
+		}
+
+		while (T == false) {
+			for (int i = 0; i < L.size() - 1; i++) {
+				Y.set(i, (float) 0);
+
+			}
+			int i = 0;
+
+			for (i = 0; i < L.size() - 1; i++) {
+				for (Integer j = L.get(i); j < L.get(i + 1); j++) {
+					int k = toIntExact(j);
+					float oldY = Y.get(toIntExact(I.get(k)));
+					Y.set(toIntExact(I.get(k)), oldY + C.get(k) * x.get(i));
+
+				}
+			}
+
+			int j = 0;
+			for (j = 0; j < L.size() - 1; j++) {
+
+				Y.set(j, d / (float) summitsNumbers + (1 - d) * Y.get(j));
+
+			}
+
+			T = true;
+			int k = 0;
+			for (k = 0; k < L.size() - 1; k++) {
+
+				if (Math.abs(Y.get(i) - x.get(i)) >= e) {
+					T = false;
+				}
+			}
+
+			for (int m = 0; i < L.size() - 1; m++) {
+				x.set(m, Y.get(m));
+
+			}
+
+		}
+		int i = 0;
+		for (i = 0; i < L.size() - 1; i++) {
+
+		}
+	}
+}
